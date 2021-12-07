@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blogengine/style.css' %}">
+{% block content %}
+<h1>Posts</h1>
+{% for post in object_list %}
+<div class="card mb-3">
+    <div class="card-header">
+        {{ post.title }}
+    </div>
+  <div class="card-body">
+    <p class="card-text">{{ post.content|truncatechars:250 }}</p>
+      <hr>
+    <h6 align="center">Дата публикации: {{ post.pub_date|date:"Y-m-d H:i" }}</h6>
+    <a href="{{ post.slug }}" class="btn btn-primary">Открыть пост</a>
+
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

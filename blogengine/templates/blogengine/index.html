@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <td>
-        {% for post in posts %}
-            {{ post.title }}
-            <br>
-            {{ post.content }}
-        {% endfor %}
-    </td>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-header">
+        {{ post.title }}
+    </div>
+  <div class="card-body">
+    <p class="card-text">{{ post.content }}</p>
+      <hr>
+    <h6 align="center">Дата публикации: {{ post.pub_date|date:"Y-m-d H:i" }}</h6>
+    <a href="#" class="btn btn-primary">Открыть пост</a>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+

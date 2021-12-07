@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+    <h2>
+        {{ post.title }}
+    </h2>
+    <p>
+        {{ post.content }}
+    </p>
+        {% if post.photo %}
+        <img src="{{ post.photo.url }}" width="90%" height="90%">
+        {% endif %}
+    <h5>Тэги: </h5>
+        {% if post.tag %}
+            {% for tag in post.tag.all %}
+    <p>{{ tag }}</p>
+            {% endfor %}
+        {% endif %}
+
+</div>
+{% endblock %}
