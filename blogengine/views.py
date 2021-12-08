@@ -6,15 +6,9 @@ from django.views import View
 from blogengine.models import *
 
 
-#def index(request):
-#    posts = Post.objects.order_by('-pub_date')
-#    context = {
-#        'posts': posts,
-#        'title': 'Список постов'
-#    }
-#    return render(request, template_name='blogengine/index.html', context=context)
-
 class PostListView(ListView):
+    # class ListView allow use pagination
+    paginate_by = 5
     model = Post
     template_name = 'blogengine/post_list.html'
 
@@ -24,7 +18,12 @@ class PostDetailView(DetailObjectMixin, View):
     template = 'blogengine/detailed_post.html'
 
 
-# Откладываем в сторону, разбираемся с миксинами
-#class PostDetailView(DetailView):
-#    model = Post
-#    template_name = 'blogengine/detailed_post.html'
+class TagListView(ListView):
+    model = Tag
+    template = 'blogengine/detailed_tags.html'
+
+
+class TagDetailView(DetailObjectMixin, View):
+    model = Tag
+    template = 'blogengine/detailed_tags.html'
+

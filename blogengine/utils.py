@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 
 from blogengine.models import *
 
+# Common mixin to get any data from any models
 class DetailObjectMixin:
     model = None
     template = None

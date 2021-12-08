@@ -10,6 +10,12 @@ def slug_generator(string):
     new_slug = slugify(string, allow_unicode=True)
     return new_slug + '-' + str(int(time.time()))
 
+
+def tag_slug_generator(string):
+    new_slug = slugify(string, allow_unicode=True)
+    return "tag-" + new_slug
+
+
 class Post(models.Model):
     """
     Модели:
@@ -53,7 +59,7 @@ class Post(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=50, verbose_name='Тэг')
-    slug = models.SlugField(unique=True, max_length=50, default='', null=True)
+    slug = models.SlugField(unique=True, max_length=50, blank=True)
 
     def __str__(self):
         return self.title
@@ -62,6 +68,11 @@ class Tag(models.Model):
         verbose_name = 'Тэг'
         verbose_name_plural = 'Тэги'
         ordering = ('title',)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = tag_slug_generator(self.title)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('detailed_tags', kwargs={'slug': self.slug})

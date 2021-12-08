@@ -5,18 +5,24 @@
     <h2>
         {{ post.title }}
     </h2>
-    <p>
-        {{ post.content }}
-    </p>
-        {% if post.photo %}
-        <img src="{{ post.photo.url }}" width="90%" height="90%">
+    {% if post.photo %}
+        <img src='{{ post.photo.url }}' width="90%" height="90%" class="center">
         {% endif %}
-    <h5>Тэги: </h5>
+    <hr>
+    <div>
+        {{ post.content }}
+    </div>
+
+    <hr>
+    <h6>Автор: {{ post.author }}</h6>
+    <h6>Дата публикации: {{ post.pub_date }}</h6>
+    <h6>Тэги: </h6>
         {% if post.tag %}
             {% for tag in post.tag.all %}
-    <p>{{ tag }}</p>
+                <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
             {% endfor %}
         {% endif %}
+    <hr>
 
 </div>
 {% endblock %}
