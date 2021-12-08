@@ -5,6 +5,7 @@
 
     {% for post in tag.posts.all %}
         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        <br>
 
     {% endfor %}
 

@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for tag in object_list %}
-        <a href="{{ tag.get_absolute_url }}"><p>{{ tag.title }}</p></a>
+        <a href="{{ tag.get_absolute_url }}"><p>{{ tag.title|safe }}</p></a>
 
     {% endfor %}
 {% endblock %}
